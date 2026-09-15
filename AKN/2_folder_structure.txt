@@ -1,0 +1,23 @@
+# Folder Structure Guide
+(Explain Like I'm 5 Edition)
+
+Welcome to the VT_PROJECT! Think of this main folder as a giant house, and every folder inside it is a different room with a specific job.
+
+Here is a tour of the house:
+
+## 🏠 The Main Folders
+- **frontend/**: This is the "Showroom" where the user hangs out. It contains all the code (written in React) that draws the buttons, the cool glowing animations, and the webcam viewer on your computer screen. 
+- **src/**: This is the "Brain Room" (Source code). It holds all the Python code that does the heavy thinking.
+  - `src/api/`: The "Telephone Switchboard". It receives the webcam pictures from the frontend and sends back answers ("Yes, that's Kritish!").
+  - `src/vision/`: The "Eyeballs". Contains the AI code that looks at faces, checks if they are alive (LivenessDetector), and matches them (FaceAnalyzer).
+  - `src/engine/`: The "Game Master". Contains the logic for the "Simon Says" challenges (checking if you actually smiled or turned your head).
+  - `src/database/`: The "Filing Cabinet". Code that knows how to save and read attendance logs.
+- **database/**: This is the actual metal Filing Cabinet itself. It holds the `attendance.db` file, which is a giant spreadsheet storing everyone's names, face math-passwords, and the exact times they were marked present.
+- **models/**: This is the "Library of AI Brains". It stores the heavy `.pth` and `.task` files. These are the giant files that the AI learned from looking at millions of faces on the internet. We load these brains into memory when the server starts.
+- **venv/**: The "Toolbox". (Virtual Environment). This folder contains all the external Python tools and libraries we downloaded from the internet to help build the project (like FastAPI and OpenCV).
+- **AKN/**: The "Instruction Manual" folder. This is where you are reading this text file right now!
+
+## 📄 The Main Files
+- **main.py**: The "On/Off Switch". When you run this file, it wakes up the entire backend brain and gets it ready to receive connections from the frontend.
+- **requirements.txt**: A shopping list. If you buy a new computer, you can give it this list and it will automatically download all the Python tools needed to run this project.
+- **test_ratio.py**: A little playground script we used to figure out the exact mathematical difference between a neutral face and a smiling face.

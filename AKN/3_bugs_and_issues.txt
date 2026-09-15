@@ -1,0 +1,31 @@
+# Bugs, Issues & Testing History
+(Explain Like I'm 5 Edition)
+
+Building a super-smart AI system isn't easy! We ran into several hilarious and tricky bugs during development. Here is the diary of everything that went wrong, and how we fixed it.
+
+## 🐛 The "Permanent Smile" Bug
+**The Issue:** When testing the challenge generator, the "Smile" challenge would instantly complete before the user even had time to smile!
+**Why it happened:** The AI measures a smile by dividing the width of your mouth by the distance between your eyes. We initially told the AI, "If the mouth is at least 25% as wide as the eyes, it's a smile!" But it turns out, a normal resting human mouth is naturally about 50% as wide as the eyes. So the AI thought EVERYONE in the world was constantly smiling 24/7!
+**The Fix:** We increased the threshold rule to 60%. Now, you actually have to pull a wide smile for the AI to believe you.
+
+## 🐛 The "Groundhog Day" React Bug
+**The Issue:** A user would do the first challenge (e.g. Thumbs Up) and then the system would instantly skip and auto-complete Challenge 2 and 3 without them doing anything!
+**Why it happened:** We accidentally trapped a variable in a "React Closure" (like locking a snapshot of time in a box). The screen would show "Challenge 2", but the camera was secretly whispering "Check if they are doing Challenge 1!" to the backend 10 times a second. Since the user was still doing Challenge 1, it kept passing!
+**The Fix:** We used a React tool called `useRef` to break the variable out of the box, ensuring the camera always asks the backend to check the *current* task.
+
+## 🛡️ The "Live Video Call" Attack
+**The Issue:** Our anti-spoofing AI successfully blocked static photos, but it failed when an attacker held up a phone playing a live video call (like FaceTime).
+**Why it happened:** Two reasons! 
+1. The AI cropped the image so tightly around the face that it couldn't even see the edges of the phone the attacker was holding. Without context, a high-quality video call looks perfectly real.
+2. The AI was saving the "Highest Score" it ever saw. If the attacker held the phone perfectly still for a single second, it locked in a 1.00 score and ignored any sudden drops when the phone shook.
+**The Fix:** We expanded the AI's vision by 40% so it can see if you are holding up a physical phone. We also threw out the "High Score" system; now, your score must consistently stay high without any sudden flickers (which screens are notorious for).
+
+## 🐛 The Empty CSV Mystery
+**The Issue:** A user verified their identity, but when they clicked "Export to CSV", the file was completely empty.
+**Why it happened:** Right as the frontend tried to send the final "Mark Attendance" message to the backend, the backend server happened to restart. The message was lost in the void, and the system failed silently.
+**The Fix:** We added loud error logs and a custom UI message. Now, the system explicitly tells you "Already Marked" or throws a network error, so nothing fails silently anymore.
+
+## 📊 AI Testing & Training Scores
+- **Facial Recognition (InsightFace):** Matches faces with a high confidence threshold of 45% (cosine similarity), ensuring no two different students are mistaken for each other.
+- **Liveness Detection (EfficientNet):** The AI must be at least 85% confident that the face is a real 3D object at the exact moment of challenge completion, with no sudden dips below 50%.
+- **Challenge Detection (MediaPipe):** Uses a complex 468-point 3D mesh mapped directly onto your face in real-time to mathematically guarantee that your nose crossed the plane of your eyes (for head turns).

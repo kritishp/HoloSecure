@@ -1,0 +1,27 @@
+# Presentation Cheat Sheet & Technical FAQ
+(For answering hard questions like a Senior Engineer)
+
+If your professors or panel ask you technical questions, use this cheat sheet to give impressive, accurate answers!
+
+## 1. "What Technology Stack did you use?"
+- **Frontend:** React.js powered by Vite (for lightning-fast hot module replacement) and styled with TailwindCSS/Framer Motion for fluid animations.
+- **Backend:** FastAPI (Python). We chose FastAPI because it is asynchronous and handles high-frequency WebSocket connections incredibly well.
+- **Database:** SQLite using SQLAlchemy (ORM) to securely store user data and attendance logs.
+- **AI/Computer Vision:** OpenCV for frame manipulation, MediaPipe for 3D face meshing, InsightFace for high-accuracy facial recognition, and PyTorch (EfficientNet) for anti-spoofing.
+
+## 2. "How did you prevent people from cheating with photos or videos?"
+"We implemented a two-factor biometric defense system:
+1. **Challenge-Response Engine:** We use MediaPipe to track 468 facial landmarks in real-time. We calculate the geometric ratios of the eyes, nose, and mouth to force the user to perform randomized physical actions (like smiling or turning their head). This defeats static photos.
+2. **Deep Learning Anti-Spoofing:** We run the facial crops through a fine-tuned EfficientNet-B0 Convolutional Neural Network (CNN). This model analyzes the pixel textures to detect screen glare, moiré interference patterns, and 2D depth distortions. This defeats live video calls and iPads."
+
+## 3. "How fast is it? Is there lag?"
+"It operates in near real-time. Instead of heavy REST API calls for every frame, we stream the webcam feed directly to the backend over a persistent bi-directional WebSocket connection at about 10 frames per second. This allows the backend to evaluate the AI models and stream the results back instantly without HTTP overhead."
+
+## 4. "Is it secure? Where are the photos saved?"
+"For privacy reasons, we DO NOT save pictures of students' faces in the database. During registration, InsightFace converts the user's face into a 512-dimensional mathematical vector (a face embedding). We only store this numerical array. When they scan for attendance, we extract the new vector and calculate the 'Cosine Similarity' between the two arrays. If the mathematical similarity is above 45%, they are verified."
+
+## 5. "What was the hardest bug you solved?"
+"Defeating the 'Live Video Call' relay attack. The AI was initially fooled by high-resolution screens because we were cropping the face too tightly. We solved this by expanding the AI's visual cropping box by 40% so it could see the physical bezels of the phone being held up. We also patched a 'High Water Mark' logic flaw by enforcing that the liveness score must stay consistently high throughout the entire scanning process, which penalizes the natural screen flickering of a phone."
+
+## 6. "Why did you give the user 20 seconds to complete each challenge?"
+"We chose 20 seconds as a perfect balance for **User Experience**. It ensures that users with slow internet, bad lighting, or slow reaction times don't get frustrated and locked out instantly. However, in a **High-Security Environment**, we would drop this timer to **5 seconds**. Because live video calls have inherent internet latency, a 5-second timeout makes it physically impossible for an attacker to read the challenge, speak it over a video call, and wait for their remote accomplice to react before the timer expires. We can easily toggle this variable in our frontend code based on the client's security needs."

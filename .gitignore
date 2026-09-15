@@ -1,0 +1,44 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+
+# Datasets (too large for Git)
+datasets/
+ACT_DATASETS/
+SiW/
+
+# Model weights / binaries
+models/*.pth
+models/*.task
+
+# Database files
+database/*.db
+database/*.corrupt
+
+# Logs & outputs
+logs/
+outputs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local

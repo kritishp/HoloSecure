@@ -1,0 +1,28 @@
+camera:
+  index: 0
+  resolution: [1280, 720]
+  fps_limit: 30
+
+recognition:
+  similarity_threshold: 0.5
+  model_name: "buffalo_l"
+  det_thresh: 0.6
+  min_face_size: 100
+
+liveness:
+  threshold: 0.8
+  model_path: "models/efficientnet_b0_antispoof.pth"
+  challenges: ["blink_once", "blink_twice", "look_left", "look_right", "look_up", "look_down", "smile", "neutral_face", "raise_open_palm", "thumbs_up"]
+  challenge_timeout: 15
+  require_consecutive_frames: 5
+
+database:
+  db_path: "database/attendance.db"
+  csv_export_dir: "outputs/attendance/"
+
+ui:
+  theme: "dark"
+  color_primary: "#00f0ff" # Neon blue
+  color_success: "#00ff00"
+  color_danger: "#ff0000"
+  window_size: "1280x800"

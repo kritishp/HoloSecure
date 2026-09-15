@@ -1,0 +1,26 @@
+# Project Overview: HoloSecure Attendance System
+(Explain Like I'm 5 Edition)
+
+## What is this project?
+Imagine a bouncer at a very exclusive club. But instead of looking at an ID card, this bouncer looks at your face. If it recognizes you, it lets you in! But wait—what if someone tries to trick the bouncer by holding up a printed photo of you? Or playing a video of you on an iPad? 
+
+This project is a Super-Smart AI Bouncer for marking school or work attendance. 
+
+It does three main things:
+1. **Facial Recognition:** It looks at a person's face through a webcam and says, "Aha! I know you, you are Kritish!"
+2. **Anti-Spoofing (Liveness Detection):** It uses a special AI detective to make sure the face is a real 3D human face, and not a fake screen, video, or piece of paper.
+3. **Interactive Challenges:** Just to be 100% sure you are not a video, it plays a quick game of Simon Says. It will ask you to randomly "Smile", "Look Left", or "Look Right". If you don't do it, you don't get your attendance marked!
+
+## How it works behind the scenes
+- We have a **Frontend** (the dashboard). This is the beautiful, glowing, futuristic screen you see on your internet browser. It turns on your webcam and shows your face.
+- We have a **Backend** (the brain). The frontend takes pictures of your face 10 times a second and throws them over to the backend using a super-fast tube called a "WebSocket".
+- Inside the brain, **three AI models** work together:
+  - AI #1 (InsightFace): Measures the distance between your eyes, nose, and mouth to prove it is you.
+  - AI #2 (EfficientNet): Looks super closely at the camera pixels to see if there is any "screen glare" or weird robot patterns (moire patterns) to catch phones or iPads.
+  - AI #3 (MediaPipe): Puts an invisible 3D mesh over your face to mathematically calculate if your nose turned left/right or if your lips stretched into a smile.
+
+## Key Points to Remember
+1. **No Duplicates Allowed:** You can only mark your attendance once per day. If you try again, the system politely ignores it so the database doesn't get cluttered.
+2. **The "Phone Edge" Trick:** To catch live video call spoofing (like if someone holds a phone playing a FaceTime call up to the camera), the AI crops the image *just wide enough* so it can see the physical plastic edges of the phone you are holding up.
+3. **The "High Score" Rule:** We don't just look at the highest anti-spoofing score you ever got during a scan. You must maintain a high score *at the exact moment* you complete the challenge, and your score cannot suddenly drop to zero (which happens when a phone screen flickers).
+4. **Data Privacy:** Faces are not saved as pictures in the database! When you register, your face is turned into a long math password (called an embedding). Next time you scan, it just checks if your new math password matches the old one!
