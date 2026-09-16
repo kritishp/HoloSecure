@@ -39,6 +39,11 @@ Thumbs.db
 *.swp
 *.swo
 
+# Personal study files (keep local only)
+docs/holosecure_architecture_guide.md
+docs/weekly_roadmap.md
+practice/
+
 # Environment
 .env
 .env.local
